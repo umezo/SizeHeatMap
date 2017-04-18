@@ -17,3 +17,13 @@ test('ファイルを読み込んで処理できる', async (t) => {
   t.deepEqual(result.maxW, 15);
   t.deepEqual(result.maxH, 30);
 });
+
+test('解析できない行があった', async (t) => {
+  const stub = sinon.stub();
+  stub.onCall(0).returns([10, 20]);
+  stub.onCall(1).returns(null);
+  stub.onCall(2).returns([15, 10]);
+
+  const result = await readResolutionDataFile( __dirname + '/../fixture/data-source.tsv', stub);
+  t.deepEqual(result.data, [[10, 20], [15, 10]]);
+});
