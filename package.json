@@ -4,7 +4,8 @@
   "description": "make heat map",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "$(npm bin)/eslint --config .eslintrc.yml --ext .js --ext .jsx batch public"
   },
   "repository": {
     "type": "git",
