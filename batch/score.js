@@ -2,8 +2,8 @@ var _ = require('lodash');
 var fs = require('fs');
 var readline = require('readline');
 
-getResolutionData('part-r-00000',function(err,result){
-  data = calculateScore(result.data,result.maxW,result.maxH);
+getResolutionData('part-r-00000', function(err, result){
+  data = calculateScore(result.data, result.maxW, result.maxH);
   console.error('output score');
   console.log(JSON.stringify({
     sample:result.data.length,
@@ -13,7 +13,7 @@ getResolutionData('part-r-00000',function(err,result){
   }));
 });
 
-function getResolutionData(file,done){
+function getResolutionData(file, done){
   return new Promise( (resolve, reject) => {
     const rs = fs.ReadStream(file);
     const readlineInterface = readline.createInterface({'input': rs, 'output': {}});
@@ -31,18 +31,18 @@ function getResolutionData(file,done){
         return;
       }
       const param = d.split('\t');
-      const w = Math.min(parseInt(param[3],10),W_LIMIT);
-      const h = Math.min(parseInt(param[4],10),H_LIMIT);
+      const w = Math.min(parseInt(param[3], 10), W_LIMIT);
+      const h = Math.min(parseInt(param[4], 10), H_LIMIT);
 
-      maxW = Math.max(maxW,w);
-      maxH = Math.max(maxH,h);
-      data.push([w,h]);
+      maxW = Math.max(maxW, w);
+      maxH = Math.max(maxH, h);
+      data.push([w, h]);
       if (data.length >= DATA_LIMIT) {
         readlineInterface.close();
       }
     });
 
-    readlineInterface.on('close',function(){
+    readlineInterface.on('close', function(){
       resolve({
         data:data,
         maxW:maxW,
@@ -54,22 +54,22 @@ function getResolutionData(file,done){
   });
 }
 
-function calculateScore(data,maxW,maxH){
+function calculateScore(data, maxW, maxH){
 
   var score = new Array(maxW*maxH);
   for (var i = 0 ; i < score.length ; i++) {
     score[i] = 0;
   }
 
-  data.forEach(function(rect,rowIndex){
+  data.forEach(function(rect, rowIndex){
     var w = rect[0];
     var h = rect[1];
 
-    var i,j,index;
+    var i, j, index;
 
     for (j = 0 ; j < h ; j++) {
       for (i = 0 ; i < w ; i++) {
-        index = j*maxW + i; 
+        index = j*maxW + i;
         score[index]++;
       }
     }
@@ -100,7 +100,7 @@ function calculateScore(data,maxW,maxH){
 //      canvas.getContext('2d').putImageData(imageData,0,0);
 //
 //      $(canvas).css({width:canvas.width,height:canvas.height});
-//      
+//
 //      console.timeEnd('createHeatMap');
 //    });
 //  });
