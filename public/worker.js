@@ -1,4 +1,4 @@
-self.addEventListener('message',function(e){
+self.addEventListener('message', function(e){
   self[e.data.cmd](e);
 });
 
@@ -12,13 +12,13 @@ self.score = function(e){
     score[i] = 0;
   }
 
-  data.forEach(function(rect,rowIndex){
-    var w = Math.min(rect[0],maxW);
-    var h = Math.min(rect[1],maxH);
+  data.forEach(function(rect, rowIndex){
+    var w = Math.min(rect[0], maxW);
+    var h = Math.min(rect[1], maxH);
 
     for (var j = 0 ; j < h ; j++) {
       for (var i = 0 ; i < w ; i++) {
-        var index = j*maxW + i; 
+        var index = j*maxW + i;
         score[index]++;
 
       }
@@ -28,5 +28,5 @@ self.score = function(e){
       console.log(rowIndex+'/'+data.length);
     }
   });
-  self.postMessage({cmd:'complete',score:score});
+  self.postMessage({cmd:'complete', score:score});
 };
