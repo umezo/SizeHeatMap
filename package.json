@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/umezo/SizeHeatMap#readme",
   "dependencies": {
+    "eslint": "^3.19.0",
     "lodash": "^4.17.4"
   }
 }
