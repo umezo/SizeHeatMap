@@ -27,3 +27,13 @@ test('解析できない行があった', async (t) => {
   const result = await readResolutionDataFile( __dirname + '/../fixture/data-source.tsv', stub);
   t.deepEqual(result.data, [[10, 20], [15, 10]]);
 });
+
+test('1行で3行分', async (t) => {
+  const stub = sinon.stub();
+  stub.onCall(0).returns([10, 20, 3]);
+  stub.onCall(1).returns(null);
+  stub.onCall(2).returns(null);
+
+  const result = await readResolutionDataFile( __dirname + '/../fixture/data-source.tsv', stub);
+  t.deepEqual(result.data, [[10, 20], [10, 20], [10, 20]]);
+});
