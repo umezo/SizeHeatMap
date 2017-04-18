@@ -13,27 +13,41 @@ getResolutionData('part-r-00000', function(err, result){
   }));
 });
 
-function getResolutionData(file){
+const DATA_LIMIT = 100000 * 2;
+const W_LIMIT = 2000;
+const H_LIMIT = 1500;
+
+function parseLineToWHArray(line) {
+  const param = line.split('\t');
+  const w = Math.min(parseInt(param[3], 10), W_LIMIT);
+  const h = Math.min(parseInt(param[4], 10), H_LIMIT);
+
+  return [w, h];
+}
+
+
+/**
+ * @param {string} filepath 読み込むファイルのパス
+ * @param {function} 読み込んだファイルの一行を受け取って、[number, number] の配列に変換する関数
+ *
+ * @return {Promise} successすると {data:{Array<Array<number>>}, maxW:{number} maxH:{number}}
+ */
+function getResolutionData(filepath, parseLineToWHArray){
   //readlineってエラーイベント無いの？マジ？
   return new Promise( (resolve) => {
-    const rs = fs.ReadStream(file);
+    const rs = fs.ReadStream(filepath);
     const readlineInterface = readline.createInterface({'input': rs, 'output': {}});
-
-    const DATA_LIMIT = 100000 * 2;
-    const W_LIMIT = 2000;
-    const H_LIMIT = 1500;
 
     let maxW = 0;
     let maxH = 0;
     let data = [];
 
-    readlineInterface.on('line', function (d) {
-      if(d.trim() === ''){
+    readlineInterface.on('line', function (line) {
+      if(line.trim() === ''){
         return;
       }
-      const param = d.split('\t');
-      const w = Math.min(parseInt(param[3], 10), W_LIMIT);
-      const h = Math.min(parseInt(param[4], 10), H_LIMIT);
+
+      const [w, h] = parseLineToWHArray(line);
 
       maxW = Math.max(maxW, w);
       maxH = Math.max(maxH, h);
