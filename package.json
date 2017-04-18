@@ -19,6 +19,7 @@
   "homepage": "https://github.com/umezo/SizeHeatMap#readme",
   "dependencies": {
     "ava": "^0.19.1",
+    "commander": "^2.9.0",
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^6.10.3",
     "lodash": "^4.17.4",
