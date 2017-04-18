@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "$(npm bin)/ava",
-    "lint": "$(npm bin)/eslint --config .eslintrc.yml --ext .js --ext .jsx batch public lib test"
+    "lint": "$(npm bin)/eslint --config .eslintrc.yml --ext .js --ext .jsx batch public lib test",
+    "build": "$(npm bin)/browserify public/src/index.js --outfile public/dist/index.js"
   },
   "repository": {
     "type": "git",
