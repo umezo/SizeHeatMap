@@ -12,8 +12,6 @@ commander
   .option('--file [filepath]', 'path to resolution data')
   .parse(process.argv);
 
-  console.log(commander);
-
 readResolutionDataFile(commander.file, parseLineToWHArray, DATA_LIMIT)
   .then(function(result){
     const data = calculateScore(result.data, result.maxW, result.maxH);
@@ -33,7 +31,6 @@ readResolutionDataFile(commander.file, parseLineToWHArray, DATA_LIMIT)
  * 1980x1080\t2000 みたいな行をパースする
  */
 function parseLineToWHArray(line) {
-  console.log(line);
   const param = line.split('\t');
   const resolution = param[0].split('x');
 
