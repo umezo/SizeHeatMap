@@ -14,43 +14,45 @@ getResolutionData('part-r-00000',function(err,result){
 });
 
 function getResolutionData(file,done){
-  var rs = fs.ReadStream(file);
-  var rl = readline.createInterface({'input': rs, 'output': {}});
+  return new Promise( (resolve, reject) => {
+    var rs = fs.ReadStream(file);
+    var rl = readline.createInterface({'input': rs, 'output': {}});
 
-  var DATA_LIMIT = 100000* 2;
-  var W_LIMIT = 2000;
-  var H_LIMIT = 1500;
+    var DATA_LIMIT = 100000* 2;
+    var W_LIMIT = 2000;
+    var H_LIMIT = 1500;
 
-  var maxW = 0;
-  var maxH = 0;
-  var data = [];
+    var maxW = 0;
+    var maxH = 0;
+    var data = [];
 
-  rl.on('line', function (d) {
-    if(d.trim() === ''){
-      return;
-    }
-    var param = d.split('\t');
-    var w = Math.min(parseInt(param[3],10),W_LIMIT);
-    var h = Math.min(parseInt(param[4],10),H_LIMIT);
+    rl.on('line', function (d) {
+      if(d.trim() === ''){
+        return;
+      }
+      var param = d.split('\t');
+      var w = Math.min(parseInt(param[3],10),W_LIMIT);
+      var h = Math.min(parseInt(param[4],10),H_LIMIT);
 
 
-    maxW = Math.max(maxW,w);
-    maxH = Math.max(maxH,h);
-    data.push([w,h]);
-    if (data.length >= DATA_LIMIT) {
-      rl.close();
-    }
-  });
-
-  rl.on('close',function(){
-    done(null,{
-      data:data,
-      maxW:maxW,
-      maxH:maxH
+      maxW = Math.max(maxW,w);
+      maxH = Math.max(maxH,h);
+      data.push([w,h]);
+      if (data.length >= DATA_LIMIT) {
+        rl.close();
+      }
     });
-  });
 
-  rl.resume();
+    rl.on('close',function(){
+      resolve({
+        data:data,
+        maxW:maxW,
+        maxH:maxH
+      });
+    });
+
+    rl.resume();
+  };
 }
 
 function calculateScore(data,maxW,maxH){
