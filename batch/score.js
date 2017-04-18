@@ -15,35 +15,34 @@ getResolutionData('part-r-00000',function(err,result){
 
 function getResolutionData(file,done){
   return new Promise( (resolve, reject) => {
-    var rs = fs.ReadStream(file);
-    var rl = readline.createInterface({'input': rs, 'output': {}});
+    const rs = fs.ReadStream(file);
+    const readlineInterface = readline.createInterface({'input': rs, 'output': {}});
 
-    var DATA_LIMIT = 100000* 2;
-    var W_LIMIT = 2000;
-    var H_LIMIT = 1500;
+    const DATA_LIMIT = 100000* 2;
+    const W_LIMIT = 2000;
+    const H_LIMIT = 1500;
 
-    var maxW = 0;
-    var maxH = 0;
-    var data = [];
+    let maxW = 0;
+    let maxH = 0;
+    let data = [];
 
-    rl.on('line', function (d) {
+    readlineInterface.on('line', function (d) {
       if(d.trim() === ''){
         return;
       }
-      var param = d.split('\t');
-      var w = Math.min(parseInt(param[3],10),W_LIMIT);
-      var h = Math.min(parseInt(param[4],10),H_LIMIT);
-
+      const param = d.split('\t');
+      const w = Math.min(parseInt(param[3],10),W_LIMIT);
+      const h = Math.min(parseInt(param[4],10),H_LIMIT);
 
       maxW = Math.max(maxW,w);
       maxH = Math.max(maxH,h);
       data.push([w,h]);
       if (data.length >= DATA_LIMIT) {
-        rl.close();
+        readlineInterface.close();
       }
     });
 
-    rl.on('close',function(){
+    readlineInterface.on('close',function(){
       resolve({
         data:data,
         maxW:maxW,
@@ -51,8 +50,8 @@ function getResolutionData(file,done){
       });
     });
 
-    rl.resume();
-  };
+    readlineInterface.resume();
+  });
 }
 
 function calculateScore(data,maxW,maxH){
