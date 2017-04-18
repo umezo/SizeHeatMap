@@ -4,7 +4,7 @@
   "description": "make heat map",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "$(npm bin)/ava",
     "lint": "$(npm bin)/eslint --config .eslintrc.yml --ext .js --ext .jsx batch public"
   },
   "repository": {
@@ -21,6 +21,7 @@
     "ava": "^0.19.1",
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^6.10.3",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "sinon": "^2.1.0"
   }
 }
