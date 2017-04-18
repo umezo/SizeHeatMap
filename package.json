@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/umezo/SizeHeatMap/issues"
   },
-  "homepage": "https://github.com/umezo/SizeHeatMap#readme"
+  "homepage": "https://github.com/umezo/SizeHeatMap#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
 }
