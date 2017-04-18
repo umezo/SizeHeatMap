@@ -1,9 +1,9 @@
-var _ = require('lodash');
+/* eslint-disable no-console */
 var fs = require('fs');
 var readline = require('readline');
 
 getResolutionData('part-r-00000', function(err, result){
-  data = calculateScore(result.data, result.maxW, result.maxH);
+  const data = calculateScore(result.data, result.maxW, result.maxH);
   console.error('output score');
   console.log(JSON.stringify({
     sample:result.data.length,
@@ -13,8 +13,9 @@ getResolutionData('part-r-00000', function(err, result){
   }));
 });
 
-function getResolutionData(file, done){
-  return new Promise( (resolve, reject) => {
+function getResolutionData(file){
+  //readlineってエラーイベント無いの？マジ？
+  return new Promise( (resolve) => {
     const rs = fs.ReadStream(file);
     const readlineInterface = readline.createInterface({'input': rs, 'output': {}});
 
