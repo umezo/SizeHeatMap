@@ -2,20 +2,42 @@
 
 #container {
   position:relative;
+  width: 2000px;
+  height: 2000px;
 }
 
 #container > * {
   position:absolute;
 }
 
-.guide {
-  width:1023px;
-  border-right:1px solid #000;;
-  border-bottom:1px dashed #000;
+#container > iframe {
+  width: 2000px;
+  height: 2000px;
 }
 
-.guide .guide-label {
-  position:absolute;
-  left:0;
-  bottom:0;
+#horizontal-grid-container {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#horizontal-grid-container .guide {
+  border-bottom:1px dashed #000;
+  height: 100px;
+}
+
+#vertical-grid-container {
+  display: flex;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+#vertical-grid-container .guide {
+  border-right:1px dashed #000;
+  width: 100px;
 }
