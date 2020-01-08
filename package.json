@@ -1,0 +1,27 @@
+{
+  "name": "sizeheatmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-typescript": "tsc --build tsconfig.json --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gist.github.com/095f4c0f49ca1ffc8ca61b62423dbcb1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gist.github.com/095f4c0f49ca1ffc8ca61b62423dbcb1"
+  },
+  "homepage": "https://gist.github.com/095f4c0f49ca1ffc8ca61b62423dbcb1",
+  "devDependencies": {
+    "@types/node": "^12.12.8",
+    "typescript": "3.6.4"
+  },
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "csv-parse": "^4.8.2"
+  }
+}

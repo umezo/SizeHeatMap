@@ -1,0 +1,10 @@
+.idea
+.DS_STORE
+.DS_Store
+node_modules
+*.log*
+build
+dist
+score.json
+map.png
+viewport.csv
