@@ -17,7 +17,7 @@
   },
   "homepage": "https://gist.github.com/095f4c0f49ca1ffc8ca61b62423dbcb1",
   "devDependencies": {
-    "@types/node": "^13.1.4",
+    "@types/node": "^14.0.14",
     "typescript": "3.7.4"
   },
   "dependencies": {
