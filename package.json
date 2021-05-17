@@ -21,7 +21,7 @@
     "typescript": "3.7.4"
   },
   "dependencies": {
-    "canvas": "^2.6.1",
+    "canvas": "^2.8.0",
     "csv-parse": "^4.8.3"
   }
 }
